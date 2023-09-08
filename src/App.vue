@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <img class="logo" :src="icon">
-    <div class="title" v-text="title"/>
+    <div class="title" v-text="getRandomTitle()"/>
     <boolean-result v-if="showBooleanAns"/>
     <options-container v-if="showOptions"
                        class="options"
@@ -28,6 +28,7 @@ import randome1 from  './assets/randome1.jpg'
 // import randome3 from  './assets/randome3.mp4'
 import BooleanResult from './components/BooleanResult'
 import OptionsContainer from "./components/OptionsContainer";
+import { TITLE_OPTIONS } from './const';
 
 export default {
   name: 'App',
@@ -38,7 +39,6 @@ export default {
   data(){
     return {
       icon: randome1,
-      title: 'Stuck with a decision? Let me help you',
       buttonsOptions: {
         boolean: {
           text: 'Yes or No?'
@@ -52,6 +52,9 @@ export default {
     }
   },
   methods:{
+    getRandomTitle() {
+      return TITLE_OPTIONS[Math.min(Math.round(Math.random()* TITLE_OPTIONS.length), TITLE_OPTIONS.length - 1)]
+    },
     randomInteger(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     },
